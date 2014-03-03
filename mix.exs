@@ -21,7 +21,8 @@ defmodule DwollaElixir.Mixfile do
   defp deps do
     [
       {:httpoison, github: "edgurgel/httpoison"},
-      {:mock, github: "jjh42/mock"}
+      {:mock, github: "jjh42/mock"},
+      {:jsex, github: "talentdeficit/jsex"}
     ]
   end
 end
