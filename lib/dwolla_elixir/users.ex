@@ -1,10 +1,9 @@
-defmodule Users do
-  import DwollaElixir.Client.Base
-  alias DwollaElixir.Client
+defmodule DwollaElixir.Users do
+  import DwollaElixir.Client
 
-  def get(id) do
+  def get(id, client) do
     get "/users/#{id}", 
-    "key", 
-    "secret"
+    client(client, :key), 
+    client(client, :secret)
   end
 end

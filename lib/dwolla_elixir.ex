@@ -9,6 +9,4 @@ defmodule DwollaElixir do
     DwollaElixir.Supervisor.start_link
   end
 
-  Record.defrecord :client, [key: nil, secret: nil, token: nil] 
-
 end

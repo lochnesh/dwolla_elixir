@@ -10,7 +10,7 @@ defmodule DwollaElixir.Mixfile do
 
   # Configuration for the OTP application
   def application do
-    [mod: { DwollaElixir, [] }]
+    [mod: { DwollaElixir, [] }, applications: [:httpoison]]
   end
 
   # Returns the list of dependencies in the format:
