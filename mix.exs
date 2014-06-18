@@ -20,8 +20,9 @@ defmodule DwollaElixir.Mixfile do
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
     [
-      {:hackney, github: "benoitc/hackney"},
-      {:json, github: "cblage/elixir-json"}
+      {:json, github: "cblage/elixir-json"},
+      {:httpoison, github: "edgurgel/httpoison"},
+      {:mock, github: "lochnesh/mock"}
     ]
   end
 end
