@@ -1,5 +1,6 @@
 defmodule DwollaElixir do
-  use Application.Behaviour
+  require Record 
+  use Application
 
   # See http://elixir-lang.org/docs/stable/Application.Behaviour.html
   # for more information on OTP Applications
@@ -7,6 +8,6 @@ defmodule DwollaElixir do
     DwollaElixir.Supervisor.start_link
   end
 
-  defrecord Client, key: nil, secret: nil, token: nil  do 
-  end
+  Record.defrecord :client, [key: nil, secret: nil, token: nil] 
+
 end
