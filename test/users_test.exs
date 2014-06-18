@@ -3,7 +3,7 @@ defmodule UsersTest do
   import Mock
 
   test_with_mock "should get users by id", HTTPoison,
-  [get: fn(_url) -> basic_user()  end] do
+  [get: fn(_url) -> basic_user() end] do
     assert basic_user() == Users.get("reflector@dwolla.com")  
   end
 
