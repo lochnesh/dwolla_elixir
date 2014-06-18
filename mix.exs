@@ -4,7 +4,7 @@ defmodule DwollaElixir.Mixfile do
   def project do
     [ app: :dwolla_elixir,
       version: "0.0.1",
-      elixir: "~> 0.12.4",
+      elixir: "~> 0.14.0",
       deps: deps ]
   end
 
