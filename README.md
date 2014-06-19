@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lochnesh/dwolla_elixir.png?branch=master)](https://travis-ci.org/lochnesh/dwolla_elixir)
+
 # DwollaElixir
 
 To start
