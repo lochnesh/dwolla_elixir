@@ -17,6 +17,15 @@ defmodule DwollaElixir.IntegrationTest do
       token: System.get_env("TOKEN")
       )
   end
+
+  def get_token do
+    System.get_env("TOKEN")
+  end
+
+  def get_pin do
+    System.get_env("PIN")
+  end
+
 end
 
   

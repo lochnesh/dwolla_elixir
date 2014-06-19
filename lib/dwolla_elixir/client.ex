@@ -16,6 +16,11 @@ defmodule DwollaElixir.Client do
     HTTPoison.get "#{get_base_url()}#{url}"
   end
 
+  def post(url, token, body) do
+    json_body = JSON.encode!(body)
+    HTTPoison.post "#{get_base_url()}#{url}?oauth_token=#{URI.encode(token)}", json_body, [{"Content-Type","application/json"}]
+  end
+
   defp get_base_url(), do: elem(:application.get_env(:dwolla_elixir, :url), 1)
 
 end
