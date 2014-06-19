@@ -1,10 +1,9 @@
 defmodule UsersIntegrationTest do
   use ExUnit.Case
-
-  import DwollaElixir.Client
+  import DwollaElixir.IntegrationTest
 
   test "should get basic user info" do
-    response = DwollaElixir.Users.get("skyler@dwolla.com",DwollaElixir.IntegrationTest.client())
+    response = DwollaElixir.Users.get("skyler@dwolla.com", client())
     
     user_response = response.body |> JSON.decode
 
