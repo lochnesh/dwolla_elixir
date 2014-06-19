@@ -5,13 +5,24 @@ defmodule DwollaElixir.Mixfile do
     [ app: :dwolla_elixir,
       version: "0.0.1",
       elixir: "~> 0.14.0",
-      deps: deps ]
+      test_paths: test_paths(Mix.env),
+      deps: deps
+      ]
   end
 
   # Configuration for the OTP application
   def application do
-    [mod: { DwollaElixir, [] }, applications: [:httpoison]]
+    [
+      mod: { DwollaElixir, [] }, 
+      applications: [:httpoison],
+      env: [url: "https://www.dwolla.com/oauth/rest/"]
+    ]
   end
+
+  #set MIX_ENV=all or do not set
+  #integration tests require env variables with client key and secret
+  defp test_paths(:all), do: ["test", "integration_test"] 
+  defp test_paths(_), do: ["test"]
 
   # Returns the list of dependencies in the format:
   # { :foobar, git: "https://github.com/elixir-lang/foobar.git", tag: "0.1" }
