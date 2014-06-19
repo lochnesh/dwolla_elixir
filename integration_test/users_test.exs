@@ -32,5 +32,13 @@ defmodule UsersIntegrationTest do
     assert nil != response
   end
 
+  test "should get nearby" do 
+    response = DwollaElixir.Users.nearby(0,0,client()).body |> JSON.decode!
+
+    success = HashDict.fetch!(response, "Success")
+
+    assert true == success
+  end
+
 end
 
