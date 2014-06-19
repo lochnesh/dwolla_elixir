@@ -5,8 +5,13 @@ defmodule UsersTest do
   import Mock
   
   test_with_mock "should get users by id", HTTPoison,
-   [get: fn(_url) -> basic_user()  end] do
+   [get: fn("https://uat.dwolla.com/oauth/rest/users/reflector@dwolla.com?client_id=key&client_secret=secret") -> basic_user()  end] do
       assert basic_user() == DwollaElixir.Users.get("reflector@dwolla.com", client(key: "key", secret: "secret"))  
+  end
+
+  test_with_mock "should get account with token", HTTPoison,
+  [get: fn("https://uat.dwolla.com/oauth/rest/users/?oauth_token=token") -> basic_user() end] do
+    assert basic_user() == DwollaElixir.Users.account(client(token: "token"))
   end
    
   def basic_user() do
