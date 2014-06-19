@@ -3,7 +3,7 @@ defmodule UsersIntegrationTest do
   import DwollaElixir.IntegrationTest
 
   test "should get basic user info" do
-    user_response = DwollaElixir.Users.get("skyler@dwolla.com", client()).body |> JSON.decode!
+    user_response = DwollaElixir.Users.get("skyler@dwolla.com", client())
     
     success = HashDict.fetch!(user_response, "Success")
     user = HashDict.fetch!(user_response, "Response")
@@ -14,7 +14,7 @@ defmodule UsersIntegrationTest do
   end
   
   test "should get account info with oauth token" do
-    user_response = DwollaElixir.Users.account(client_with_token()).body |> JSON.decode!
+    user_response = DwollaElixir.Users.account(client_with_token())
     
     success = HashDict.fetch!(user_response, "Success")
     user = HashDict.fetch!(user_response, "Response")
@@ -33,7 +33,7 @@ defmodule UsersIntegrationTest do
   end
 
   test "should get nearby" do 
-    response = DwollaElixir.Users.nearby(0,0,client()).body |> JSON.decode!
+    response = DwollaElixir.Users.nearby(0,0,client())
 
     success = HashDict.fetch!(response, "Success")
 
