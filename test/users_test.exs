@@ -4,27 +4,25 @@ defmodule UsersTest do
   import DwollaElixir.Client
   import Mock
   
-  test_with_mock "should get users by id", HTTPoison,
-   [get: fn("https://uat.dwolla.com/oauth/rest/users/reflector@dwolla.com?client_id=key&client_secret=secret") -> basic_user()  end] do
-      assert basic_user() == DwollaElixir.Users.get("reflector@dwolla.com", client(key: "key", secret: "secret"))  
+  test "should get users by id" do 
+    with_mock HTTPoison, [get: fn(_url) -> :ok end] do
+      DwollaElixir.Users.get("reflector@dwolla.com", client(key: "key", secret: "secret"))  
+      assert called HTTPoison.get("https://uat.dwolla.com/oauth/rest/users/reflector@dwolla.com?client_id=key&client_secret=secret")
+    end
   end
 
-  test_with_mock "should get account with token", HTTPoison,
-  [get: fn("https://uat.dwolla.com/oauth/rest/users/?oauth_token=token") -> basic_user() end] do
-    assert basic_user() == DwollaElixir.Users.account(client(token: "token"))
+  test "should get account with token" do
+    with_mock HTTPoison, [get: fn(_url) -> :ok end] do
+      DwollaElixir.Users.account(client(token: "token"))
+      assert called HTTPoison.get("https://uat.dwolla.com/oauth/rest/users/?oauth_token=token")
+    end
   end
    
-  def basic_user() do
-    JSON.encode [
-    Success: true, 
-    Message: "Success", 
-    Response: JSON.encode! [
-      Id: "812-111-1111",
-      Latitude: 41.584546,
-      Longitude: -93.634167,
-      Name: "Test User"
-      ]
-    ]  
+  test "should get avatar for account id" do 
+    with_mock HTTPoison, [get: fn(_url) -> :ok end] do
+      DwollaElixir.Users.avatar("812-111-1111")
+      assert called HTTPoison.get("https://uat.dwolla.com/oauth/rest/avatars/812-111-1111")    
+    end
   end
 
 end

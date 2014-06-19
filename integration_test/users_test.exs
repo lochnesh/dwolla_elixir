@@ -25,7 +25,12 @@ defmodule UsersIntegrationTest do
     assert "Des Moines" == HashDict.fetch!(user, "City")
     assert "Personal" == HashDict.fetch!(user, "Type")
   end
-    
+
+  test "should get avatar given dwolla id" do
+    response = DwollaElixir.Users.avatar("812.443.3023").body 
+      
+    assert nil != response
+  end
 
 end
 
