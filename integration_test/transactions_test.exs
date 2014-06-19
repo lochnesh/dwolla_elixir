@@ -32,6 +32,18 @@ defmodule TransactionsIntegrationTest do
     assert "Dwolla" == HashDict.fetch!(transaction, "UserType")
   end
 
+  test "should get stats" do
+   
+    response = DwollaElixir.Transactions.stats(client(token: get_token()))
+    
+    success = HashDict.fetch!(response, "Success")
+    details = HashDict.fetch!(response, "Response")
+
+    assert true == success
+    assert 0 <= HashDict.fetch!(details, "TransactionsCount")
+    assert 0 <= HashDict.fetch!(details, "TransactionsTotal")
+  end
+
 end
   
 
