@@ -5,4 +5,6 @@ before_install:
    - git clone https://github.com/elixir-lang/elixir
    - make -C elixir
 before_script: "export PATH=`pwd`/elixir/bin:$PATH"
-script: mix test
+script:
+   - mix deps.get 
+   - mix test
