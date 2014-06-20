@@ -2,8 +2,8 @@ ExUnit.start
 
 :application.set_env(:dwolla_elixir, :url, "https://uat.dwolla.com/oauth/rest/")
 
-defmodule DwollaElixir.IntegrationTest do
-  import DwollaElixir.Client
+defmodule Dwolla.IntegrationTest do
+  import Dwolla.Client
   
   def client do  
     client(

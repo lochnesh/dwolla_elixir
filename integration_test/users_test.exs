@@ -1,9 +1,9 @@
 defmodule UsersIntegrationTest do
   use ExUnit.Case
-  import DwollaElixir.IntegrationTest
+  import Dwolla.IntegrationTest
 
   test "should get basic user info" do
-    user_response = DwollaElixir.Users.get("skyler@dwolla.com", client())
+    user_response = Dwolla.Users.get("skyler@dwolla.com", client())
 
     success = HashDict.fetch!(user_response, "Success")
     user = HashDict.fetch!(user_response, "Response")
@@ -14,7 +14,7 @@ defmodule UsersIntegrationTest do
   end
   
   test "should get account info with oauth token" do
-    user_response = DwollaElixir.Users.account(client_with_token())
+    user_response = Dwolla.Users.account(client_with_token())
     
     success = HashDict.fetch!(user_response, "Success")
     user = HashDict.fetch!(user_response, "Response")
@@ -27,13 +27,13 @@ defmodule UsersIntegrationTest do
   end
 
   test "should get avatar given dwolla id" do
-    response = DwollaElixir.Users.avatar("812.443.3023").body 
+    response = Dwolla.Users.avatar("812.443.3023").body 
       
     assert nil != response
   end
 
   test "should get nearby" do 
-    response = DwollaElixir.Users.nearby(0,0,client())
+    response = Dwolla.Users.nearby(0,0,client())
 
     success = HashDict.fetch!(response, "Success")
 

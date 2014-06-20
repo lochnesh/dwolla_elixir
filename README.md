@@ -12,7 +12,7 @@ Examples
 -Get user by Id
 
 ```` elixir
-require DwollaElixir.Client
-client = DwollaElixir.Client.client(key: "KEY", secret: "SECRET")
-DwollaElixir.Users.get("reflector@dwolla.com",client)
+require Dwolla.Client
+client = Dwolla.Client.client(key: "KEY", secret: "SECRET")
+Dwolla.Users.get("reflector@dwolla.com",client)
 ````

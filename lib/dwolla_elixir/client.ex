@@ -1,4 +1,4 @@
-defmodule DwollaElixir.Client do
+defmodule Dwolla.Client do
   require Record
   require URI
 

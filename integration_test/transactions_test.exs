@@ -1,10 +1,10 @@
 defmodule TransactionsIntegrationTest do
   use ExUnit.Case
-  import DwollaElixir.IntegrationTest
-  import DwollaElixir.Client
+  import Dwolla.IntegrationTest
+  import Dwolla.Client
 
   test "should send money" do
-    response = DwollaElixir.Transactions.send(
+    response = Dwolla.Transactions.send(
       [ destinationId: "812-201-0130",
         pin: get_pin(),
         amount: ".01"], client(token: get_token()))
@@ -16,12 +16,12 @@ defmodule TransactionsIntegrationTest do
 
   test "should get by id" do
     client = client(token: get_token())
-    id = HashDict.fetch!(DwollaElixir.Transactions.send([
+    id = HashDict.fetch!(Dwolla.Transactions.send([
       destinationId: "812-201-0130",
       pin: get_pin(),
       amount: ".01"], client), "Response") 
 
-    response = DwollaElixir.Transactions.get_by_id(id, client)
+    response = Dwolla.Transactions.get_by_id(id, client)
 
     success = HashDict.fetch!(response, "Success")
     transaction = HashDict.fetch!(response, "Response")
@@ -34,7 +34,7 @@ defmodule TransactionsIntegrationTest do
 
   test "should get stats" do
    
-    response = DwollaElixir.Transactions.stats(
+    response = Dwolla.Transactions.stats(
       client(token: get_token()),
       %{"startDate" => "2014-04-01"})
     

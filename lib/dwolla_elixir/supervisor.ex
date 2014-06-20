@@ -1,4 +1,4 @@
-defmodule DwollaElixir.Supervisor do
+defmodule Dwolla.Supervisor do
   use Supervisor
 
   def start_link do

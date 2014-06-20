@@ -1,6 +1,6 @@
 defmodule ClientTest do
   use ExUnit.Case
-  import DwollaElixir.Client
+  import Dwolla.Client
 
   test "should get key, secret, and token" do
     client = client(key: "key", secret: "secret", token: "token")
