@@ -45,6 +45,24 @@ defmodule TransactionsIntegrationTest do
     assert 1 <= HashDict.fetch!(details, "TransactionsTotal")
   end
 
+  test "should get transaction list" do
+    response = Dwolla.Transactions.list(
+      Dwolla.Client.new,
+      %{
+        "sinceDate" => "2014-04-01",
+        "limit" => "33",
+        "types" => "money_sent"  
+      })
+
+    success = HashDict.fetch!(response, "Success")
+    details = HashDict.fetch!(response, "Response")
+
+    assert true == success
+    assert 33 == Enum.count details
+    assert true == Enum.all? details, fn(x) -> HashDict.fetch!(x, "Type") == "money_sent" end
+
+  end
+
 end
   
 

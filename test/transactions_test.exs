@@ -27,11 +27,17 @@ defmodule TransactionsTest do
 
   test "should get transaction stats" do 
     with_mock HTTPoison, [get: fn(_url) -> empty_response() end] do
-      body = []
       Dwolla.Transactions.stats(client(token: "token"))
       assert called HTTPoison.get "https://uat.dwolla.com/oauth/rest/transactions/stats?oauth_token=token"
     end
   end
+
+  test "should get transaction listing" do
+    with_mock HTTPoison, [get: fn(_url) -> empty_response() end] do
+      Dwolla.Transactions.list(client(token: "token"), %{"sinceDate" => "2014-04-01"})
+      assert called HTTPoison.get "https://uat.dwolla.com/oauth/rest/transactions/?oauth_token=token&sinceDate=2014-04-01"
+    end
+  end 
 
 end
  

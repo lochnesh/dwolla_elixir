@@ -14,5 +14,8 @@ defmodule Dwolla.Transactions do
   @doc "https://developers.dwolla.com/dev/docs/transactions/stats"
   def stats(client, params \\ %{}), do: get_with_token("transactions/stats", client(client,:token), params)
 
+  @doc "https://developers.dwolla.com/dev/docs/transactions/listing"
+  def list(client, params \\ %{}), do: get_with_token("transactions/", client(client,:token), params)
+
 end
  
