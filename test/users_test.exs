@@ -29,7 +29,7 @@ defmodule UsersTest do
   test "should get nearby for lat and long" do
     with_mock HTTPoison, [get: fn(_url) -> empty_response() end] do
       DwollaElixir.Users.nearby(6,6,client(key: "key", secret: "secret"))
-      assert called HTTPoison.get("https://uat.dwolla.com/oauth/rest/users/nearby?client_id=key&client_secret=secret")
+      assert called HTTPoison.get("https://uat.dwolla.com/oauth/rest/users/nearby?client_id=key&client_secret=secret&latitude=6&longitude=6")
     end
   end
 

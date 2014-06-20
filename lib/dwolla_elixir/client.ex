@@ -4,14 +4,14 @@ defmodule DwollaElixir.Client do
 
   Record.defrecord :client, [key: nil, secret: nil, token: nil] 
 
-  def get_with_key_secret(url, key, secret) do
-    params = %{"client_id" => key, "client_secret" => secret} 
+  def get_with_key_secret(url, key, secret, params \\ %{}) do
+    params = Enum.concat %{"client_id" => key, "client_secret" => secret}, params 
     response = HTTPoison.get "#{get_base_url()}#{url}?#{URI.encode_query params}"
     response.body |> JSON.decode!
   end
 
-  def get_with_token(url, token) do
-    params = %{"oauth_token" => token}
+  def get_with_token(url, token, params \\ %{}) do
+    params = Enum.concat %{"oauth_token" => token}, params
     response = HTTPoison.get "#{get_base_url()}#{url}?#{URI.encode_query params}"
     response.body |> JSON.decode!
   end
@@ -20,8 +20,8 @@ defmodule DwollaElixir.Client do
     HTTPoison.get "#{get_base_url()}#{url}"
   end
 
-  def post(url, token, body) do
-    params = %{"oauth_token" => token}
+  def post(url, token, body, params \\ %{}) do
+    params = Enum.concat %{"oauth_token" => token}, params
     json_body = JSON.encode!(body)
     response = HTTPoison.post "#{get_base_url()}#{url}?#{URI.encode_query params}", json_body, [{"Content-Type","application/json"}]
     response.body |> JSON.decode!
