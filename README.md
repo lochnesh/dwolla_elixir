@@ -2,11 +2,11 @@
 
 # DwollaElixir
 An Elixir wrapper for Dwolla's API
-(Dwolla API docs)[https://developers.dwolla.com/dev/]
+[Dwolla API docs](https://developers.dwolla.com/dev/)
 
 ## Usage
 
-Add DwollaElxiir as a dependency to your `mix.exs` file
+Add DwollaElixir as a dependency to your `mix.exs` file
 
 ```` elixir
 defp deps do
@@ -29,10 +29,10 @@ The Dwolla end points require the application key and secret or an oauth token. 
 #set application variables in mix.exs 
 #or set environment variable key, secret, token
 #then call 
-Dwolla.Client.new
+client = Dwolla.Client.new
 
 #to define inline
-Dwolla.Client.client(key: "KEY", secret: "SECRET", token: "TOKEN")
+client = Dwolla.Client.client(key: "KEY", secret: "SECRET", token: "TOKEN")
 ````
 
 ###Examples
@@ -44,7 +44,7 @@ iex -S mix
 -Obtain a client record
 ````
 require Dwolla.Client
-Dwolla.Client.client(key: "KEY", secret: "SECRET", token: "TOKEN")
+client = Dwolla.Client.client(key: "KEY", secret: "SECRET", token: "TOKEN")
 ````
 
 -Get user by Id
@@ -53,14 +53,14 @@ Dwolla.Users.get("reflector@dwolla.com",client)
 ````
 
 ##Integration tests
-Integration tests are contained in integration_test folder. Integration tests execute against the (Dwolla UAT environment)[https://uat.dwolla.com] To run, define the following environment variables (you will need to obtain an application key, secret, and an oauth_token.
+Integration tests are contained in integration_test folder. Integration tests execute against the [Dwolla UAT environment](https://uat.dwolla.com) To run, define the following environment variables (you will need to obtain an application key, secret, and an oauth_token.
 
 ````sh
 export MIX_ENV=all
-export KEY=KEY
-export SECRET=SECRET
-export TOKEN=TOKEN
-export PIN=PIN
+export KEY={YOUR_KEY}
+export SECRET=(YOUR_SECRET}
+export TOKEN={YOUR_TOKEN}
+export PIN={TEST_USER_PIN}
 ```` 
 
 ## Support
