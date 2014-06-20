@@ -2,7 +2,13 @@ defmodule Dwolla.Client do
   require Record
   require URI
 
-  Record.defrecord :client, [key: nil, secret: nil, token: nil] 
+  Record.defrecord :client, [
+    key: Application.get_env(:dwolla_elixir, :key, System.get_env("KEY")),
+    secret: Application.get_env(:dwolla_elixir, :secret, System.get_env("SECRET")),
+    token: Application.get_env(:dwolla_elixir, :token, System.get_env("TOKEN")),
+  ] 
+
+  def new, do: client() 
 
   def get_with_key_secret(url, key, secret, params \\ %{}) do
     params = Enum.concat %{"client_id" => key, "client_secret" => secret}, params 
@@ -27,7 +33,5 @@ defmodule Dwolla.Client do
     response.body |> JSON.decode!
   end
 
-  defp get_base_url(), do: elem(:application.get_env(:dwolla_elixir, :url), 1)
-
+  defp get_base_url(), do: Application.get_env(:dwolla_elixir, :url)
 end
-

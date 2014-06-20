@@ -1,13 +1,12 @@
 defmodule TransactionsIntegrationTest do
   use ExUnit.Case
   import Dwolla.IntegrationTest
-  import Dwolla.Client
 
   test "should send money" do
     response = Dwolla.Transactions.send(
       [ destinationId: "812-201-0130",
         pin: get_pin(),
-        amount: ".01"], client(token: get_token()))
+        amount: ".01"], Dwolla.Client.new)
     
     success = HashDict.fetch!(response, "Success")
 
@@ -15,7 +14,7 @@ defmodule TransactionsIntegrationTest do
   end
 
   test "should get by id" do
-    client = client(token: get_token())
+    client = Dwolla.Client.new
     id = HashDict.fetch!(Dwolla.Transactions.send([
       destinationId: "812-201-0130",
       pin: get_pin(),
@@ -35,7 +34,7 @@ defmodule TransactionsIntegrationTest do
   test "should get stats" do
    
     response = Dwolla.Transactions.stats(
-      client(token: get_token()),
+      Dwolla.Client.new,
       %{"startDate" => "2014-04-01"})
     
     success = HashDict.fetch!(response, "Success")
