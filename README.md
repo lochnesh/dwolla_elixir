@@ -22,7 +22,7 @@ def application do
 end
 ````
 
-###Obtaining a client
+##Obtaining a client
 The Dwolla end points require the application key and secret or an oauth token. This API wrapper uses an Elixir record called Client which holds all three.  The wrapped end points require a Client record.  To obtain a client record, 
 
 ```` elixir
@@ -35,7 +35,7 @@ client = Dwolla.Client.new
 client = Dwolla.Client.client(key: "KEY", secret: "SECRET", token: "TOKEN")
 ````
 
-###Examples
+##Examples
 To start in interactive console
 ```` elixir
 iex -S mix
