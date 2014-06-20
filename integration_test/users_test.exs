@@ -4,7 +4,7 @@ defmodule UsersIntegrationTest do
 
   test "should get basic user info" do
     user_response = DwollaElixir.Users.get("skyler@dwolla.com", client())
-    
+
     success = HashDict.fetch!(user_response, "Success")
     user = HashDict.fetch!(user_response, "Response")
 
