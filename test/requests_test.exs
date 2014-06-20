@@ -29,5 +29,12 @@ defmodule RequestsTest do
     end
   end
 
+  test "should list pending requests" do
+    with_mock HTTPoison, [get: fn(_url) -> empty_response() end] do
+      Dwolla.Requests.list(client(token: "token"), %{"limit" => "3"})
+      assert called HTTPoison.get "https://uat.dwolla.com/oauth/rest/requests/?oauth_token=token&limit=3"
+    end
+  end
+
 end
  

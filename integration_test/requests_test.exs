@@ -4,9 +4,7 @@ defmodule RequestsIntegrationTest do
   import Dwolla.IntegrationTest
 
   test "should request money" do
-    response = Dwolla.Requests.request(
-      [sourceId: "812-201-0130",
-       amount: ".01"], Dwolla.Client.new)
+    response = request()
     
     success = HashDict.fetch!(response, "Success")
     id = HashDict.fetch!(response, "Response")
@@ -16,9 +14,7 @@ defmodule RequestsIntegrationTest do
   end
 
   test "should fulfill request" do
-    id = HashDict.fetch!(Dwolla.Requests.request(
-      [sourceId: "812-201-0130",
-       amount: ".01"], Dwolla.Client.new), "Response")
+    id = HashDict.fetch!(request(), "Response")
 
     response = Dwolla.Requests.fulfill(
       id,
@@ -35,8 +31,31 @@ defmodule RequestsIntegrationTest do
     assert 0.01 == HashDict.fetch!(details, "Amount")
     assert "812-201-0130" == HashDict.fetch!(source,"Id")
     assert "812-443-3023" == HashDict.fetch!(dest,"Id")
+  end
+
+  test "should list pending requests" do
+    request()
+    request()
+    request()
+
+    response = Dwolla.Requests.list(
+      Dwolla.Client.client(token: get_other_token()),
+      %{"start_date" => "2014-04-01",
+        "limit" => "3"})
+
+    success = HashDict.fetch!(response, "Success")
+    details = HashDict.fetch!(response, "Response")
+
+    assert true == success
+    assert 3 == Enum.count details
+    assert true = Enum.all? details, fn(x) -> HashDict.fetch!(x, "Status") == "Pending" end 
+
 
   end
+
+  defp request, do: Dwolla.Requests.request(
+      [sourceId: "812-201-0130",
+       amount: ".01"], Dwolla.Client.new)
 
 
 end 
