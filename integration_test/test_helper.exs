@@ -7,6 +7,10 @@ defmodule Dwolla.IntegrationTest do
     System.get_env("PIN")
   end
 
+  def get_other_token do
+    System.get_env("OTHER_TOKEN")
+  end
+
 end
 
   

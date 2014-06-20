@@ -54,6 +54,7 @@ Dwolla.Users.get("reflector@dwolla.com",client)
 
 ##Integration tests
 Integration tests are contained in integration_test folder. Integration tests execute against the [Dwolla UAT environment](https://uat.dwolla.com) To run, define the following environment variables (you will need to obtain an application key, secret, and an oauth_token.
+[Get oauth token](https://developers.dwolla.com/dev/token)
 
 ````sh
 export MIX_ENV=all
