@@ -4,6 +4,7 @@ env:
     - ELIXIR="v0.14.0"
     - ELIXIR="v0.14.1"
     - ELIXIR="v0.14.2"
+    - ELIXIR="master"
   global:
     - secure: IabOSaV2Y/FM09Ka0MQ+64mKdkn4mJgcQAVIHXOCWpoSqQsoTg9lgqt+2Leo9rGd3WnikeuGtWWQURiN0uQT1zjCpA14jqsAfQrVLkeRjp4n7axopwZB8xOC9+gEm/W4V3RKWoNVvY2r6qjMr03dfGMGmF6UNIFSD+ehBMutwdg=
     - secure: ammR97lGPt44kWG2h2kuOTjnOZP3Gi1IV3xfs04sX7NX6dmqP+WTjN62/5FtSPcGrWfIRyfsJ4WMyYRfcZsq9XpncWcH77AkS0vxDc18qvp8ddRnwjbBdIWWG9+PosuIMVy7l/UHFYit89O6gXx/Ezf0fnVVwrzJcQese+eOYXU=
