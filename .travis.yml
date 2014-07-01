@@ -1,14 +1,18 @@
 language: erlang
+env:
+  - ELIXIR="v0.14.0"
+  - ELIXIR="v0.14.1"
+  - ELIXIR="v0.14.2"
 otp_release:
-- 17.0
+  - 17.0
 before_install:
-- wget http://s3.hex.pm/builds/elixir/v0.14.0.zip
-- unzip -d elixir v0.14.0.zip 
+  - wget http://s3.hex.pm/builds/elixir/$ELIXIR.zip
+  - unzip -d elixir $ELIXIR.zip 
 before_script:
-- export PATH=`pwd`/elixir/bin:$PATH
-- mix deps.get
+  - export PATH=`pwd`/elixir/bin:$PATH
+  - mix deps.get
 script:
-- MIX_ENV=all mix test
+  - MIX_ENV=all mix test
 env:
   global:
   - secure: IabOSaV2Y/FM09Ka0MQ+64mKdkn4mJgcQAVIHXOCWpoSqQsoTg9lgqt+2Leo9rGd3WnikeuGtWWQURiN0uQT1zjCpA14jqsAfQrVLkeRjp4n7axopwZB8xOC9+gEm/W4V3RKWoNVvY2r6qjMr03dfGMGmF6UNIFSD+ehBMutwdg=
