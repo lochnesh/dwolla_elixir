@@ -60,7 +60,8 @@ Integration tests are contained in integration_test folder. Integration tests ex
 export MIX_ENV=all
 export KEY={YOUR_KEY}
 export SECRET=(YOUR_SECRET}
-export TOKEN={YOUR_TOKEN}
+export TOKEN={SOME_TEST_USER_TOKEN}
+export OTHER_TOKEN={ANOTHER_TEST_USER_TOKEN}
 export PIN={TEST_USER_PIN}
 ```` 
 
