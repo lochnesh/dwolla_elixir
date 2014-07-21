@@ -42,7 +42,7 @@ iex -S mix
 ```` 
 
 -Obtain a client record
-````
+```` elixir
 require Dwolla.Client
 client = Dwolla.Client.client(key: "KEY", secret: "SECRET", token: "TOKEN")
 ````
