@@ -20,7 +20,7 @@ defmodule RequestsIntegrationTest do
       id,
       [pin: get_pin(),
        amount: ".01"],
-      Dwolla.Client.client(token: get_other_token())) 
+      Dwolla.Client.client(token: get_merchant_token())) 
 
     success = HashDict.fetch!(response, "Success")
     details = HashDict.fetch!(response, "Response")
@@ -39,7 +39,7 @@ defmodule RequestsIntegrationTest do
     request()
 
     response = Dwolla.Requests.list(
-      Dwolla.Client.client(token: get_other_token()),
+      Dwolla.Client.client(token: get_merchant_token()),
       %{"start_date" => "2014-04-01",
         "limit" => "3"})
 

@@ -39,5 +39,19 @@ defmodule TransactionsTest do
     end
   end 
 
+  test "should issue refund" do 
+    with_mock HTTPoison, [post: fn(_url, _body, _headers) -> empty_response() end] do
+      body = [pin: "3333",
+              transactionId: "123456",
+              fundsSource: "Balance",
+              amount: "5.50"]
+      Dwolla.Transactions.refund(body,client(token: "token"))
+      assert called HTTPoison.post(
+        "https://uat.dwolla.com/oauth/rest/transactions/refund?oauth_token=token",
+        JSON.encode!(body),
+        [{"Content-Type","application/json"}])
+    end
+  end
+
 end
  

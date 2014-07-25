@@ -7,8 +7,8 @@ defmodule Dwolla.IntegrationTest do
     System.get_env("PIN")
   end
 
-  def get_other_token do
-    System.get_env("OTHER_TOKEN")
+  def get_merchant_token do
+    System.get_env("MERCHANT_TOKEN")
   end
 
 end

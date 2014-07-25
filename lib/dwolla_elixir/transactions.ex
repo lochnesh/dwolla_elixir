@@ -17,5 +17,7 @@ defmodule Dwolla.Transactions do
   @doc "https://developers.dwolla.com/dev/docs/transactions/listing"
   def list(client, params \\ %{}), do: get_with_token("transactions/", client(client,:token), params)
 
+  @doc "https://developers.dwolla.com/dev/docs/transactions/refund"
+  def refund(body,client), do: post("transactions/refund", client(client,:token), body)
 end
  
