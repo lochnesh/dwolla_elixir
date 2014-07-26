@@ -14,31 +14,31 @@ defmodule TransactionsIntegrationTest do
     assert true == success
   end
 
-  test "should refund money" do
-    Dwolla.Transactions.send(
-      [ destinationId: "812-201-0130",
-        pin: get_pin(),
-        amount: ".01"], Dwolla.Client.new)
+  #test "should refund money" do
+  #  Dwolla.Transactions.send(
+  #    [ destinationId: "812-201-0130",
+  #      pin: get_pin(),
+  #      amount: ".01"], Dwolla.Client.new)
     
-    listing = Dwolla.Transactions.list(
-      Dwolla.Client.client(token: get_merchant_token()),
-      %{"types" => "money_received",
-        "limit" => "1"})
+  #  listing = Dwolla.Transactions.list(
+  #    Dwolla.Client.client(token: get_merchant_token()),
+  #    %{"types" => "money_received",
+  #      "limit" => "1"})
     
-    response = HashDict.fetch!(listing, "Response")
+  #  response = HashDict.fetch!(listing, "Response")
 
-    transaction_id = HashDict.fetch!(Enum.fetch!(response, 0), "Id")
+  #  transaction_id = HashDict.fetch!(Enum.fetch!(response, 0), "Id")
 
-    refund_response = Dwolla.Transactions.refund(
-      [ pin: get_pin(),
-        transactionId: transaction_id,
-        fundsSource: "Balance",
-        amount: ".01"], Dwolla.Client.client(token: get_merchant_token()))
+  #  refund_response = Dwolla.Transactions.refund(
+  #    [ pin: get_pin(),
+  #      transactionId: transaction_id,
+  #      fundsSource: "Balance",
+  #      amount: ".01"], Dwolla.Client.client(token: get_merchant_token()))
 
-    success = HashDict.fetch!(refund_response, "Success")
+  #  success = HashDict.fetch!(refund_response, "Success")
 
-    assert true == success
-  end
+  #  assert true == success
+  #end
 
   test "should get by id" do
     client = Dwolla.Client.new
