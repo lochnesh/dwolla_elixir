@@ -50,7 +50,16 @@ defmodule RequestsIntegrationTest do
     assert 3 == Enum.count details
     assert true = Enum.all? details, fn(x) -> HashDict.fetch!(x, "Status") == "Pending" end 
 
+  end
 
+  test "should cancel request" do 
+    id = HashDict.fetch!(request(), "Response")
+
+    response = Dwolla.Requests.cancel(id, Dwolla.Client.new)
+
+    success = HashDict.fetch!(response, "Success")
+
+    assert true == success
   end
 
   defp request, do: Dwolla.Requests.request(

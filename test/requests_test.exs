@@ -36,5 +36,16 @@ defmodule RequestsTest do
     end
   end
 
+  test "should cancel a request" do 
+    with_mock HTTPoison, [post: fn(_url, _body, _headers) -> empty_response() end] do
+      body = []
+      Dwolla.Requests.cancel("12345", client(token: "token"))
+      assert called HTTPoison.post(
+        "https://uat.dwolla.com/oauth/rest/requests/12345/cancel?oauth_token=token",
+        JSON.encode!(body),
+        [{"Content-Type","application/json"}])
+    end
+  end
+
 end
  

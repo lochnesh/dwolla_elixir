@@ -6,12 +6,15 @@ defmodule Dwolla.Requests do
   """
 
   @doc "https://developers.dwolla.com/dev/docs/requests/request"
-  def request(body,client), do: post("requests/",client(client,:token), body)
+  def request(body, client), do: post("requests/", client(client, :token), body)
 
   @doc "https://developers.dwolla.com/dev/docs/requests/fulfill"
-  def fulfill(id,body,client), do: post("requests/#{id}/fulfill", client(client,:token), body)
+  def fulfill(id, body, client), do: post("requests/#{id}/fulfill", client(client, :token), body)
 
   @doc "https://developers.dwolla.com/dev/docs/requests/pending"
-  def list(client, params \\ %{}), do: get_with_token("requests/", client(client,:token), params)
+  def list(client, params \\ %{}), do: get_with_token("requests/", client(client, :token), params)
+
+  @doc "https://developers.dwolla.com/dev/docs/requests/cancel"
+  def cancel(request_id, client), do: post("requests/#{request_id}/cancel", client(client, :token), [])
 end
  
