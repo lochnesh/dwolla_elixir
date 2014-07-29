@@ -16,5 +16,8 @@ defmodule Dwolla.Requests do
 
   @doc "https://developers.dwolla.com/dev/docs/requests/cancel"
   def cancel(request_id, client), do: post("requests/#{request_id}/cancel", client(client, :token), [])
+
+  @doc "https://developers.dwolla.com/dev/docs/requests/byid"
+  def get_by_id(request_id, client), do: get_with_token("requests/#{request_id}", client(client, :token))
 end
  

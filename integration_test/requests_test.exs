@@ -51,6 +51,18 @@ defmodule RequestsIntegrationTest do
     assert true = Enum.all? details, fn(x) -> HashDict.fetch!(x, "Status") == "Pending" end 
 
   end
+  
+  test "should get requests by id" do 
+    id = HashDict.fetch!(request(), "Response")
+
+    response = Dwolla.Requests.get_by_id(id, Dwolla.Client.new)
+
+    success = HashDict.fetch!(response, "Success")
+    returned_id = HashDict.fetch!(HashDict.fetch!(response, "Response"), "Id")
+
+    assert true == success
+    assert returned_id == id
+  end
 
   test "should cancel request" do 
     id = HashDict.fetch!(request(), "Response")

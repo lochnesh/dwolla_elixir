@@ -36,6 +36,13 @@ defmodule RequestsTest do
     end
   end
 
+  test "should get request details" do 
+    with_mock HTTPoison, [get: fn(_url) -> empty_response() end] do
+      Dwolla.Requests.get_by_id("12345", client(token: "token"))
+      assert called HTTPoison.get "https://uat.dwolla.com/oauth/rest/requests/12345?oauth_token=token"
+    end
+  end
+
   test "should cancel a request" do 
     with_mock HTTPoison, [post: fn(_url, _body, _headers) -> empty_response() end] do
       body = []
