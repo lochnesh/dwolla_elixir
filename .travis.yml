@@ -19,6 +19,7 @@ before_install:
 - unzip -d elixir $ELIXIR.zip
 before_script:
 - export PATH=`pwd`/elixir/bin:$PATH
+- mix local.hex --force
 - mix deps.get
 script:
 - MIX_ENV=all mix test
