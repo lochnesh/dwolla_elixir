@@ -12,4 +12,11 @@ defmodule FundingSourcesTest do
     end
   end
 
+  test "should get funding source details" do 
+    with_mock HTTPoison, [get: fn(_url) -> empty_response() end] do
+      Dwolla.FundingSources.get_by_id("1", client(token: "token"))
+      assert called HTTPoison.get("https://uat.dwolla.com/oauth/rest/fundingsources/1?oauth_token=token")
+    end
+  end
+
 end

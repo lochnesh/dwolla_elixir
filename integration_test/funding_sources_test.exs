@@ -14,6 +14,14 @@ defmodule FundingSourcesIntegrationTest do
 
   end
 
+  test "should get details by id" do
+    response = Dwolla.FundingSources.list(Dwolla.Client.new)
+    id = HashDict.fetch!(Enum.fetch!(HashDict.fetch!(response, "Response"), 1), "Id")
+    funding_source = Dwolla.FundingSources.get_by_id(id, Dwolla.Client.new)
+
+    assert true = HashDict.fetch!(funding_source, "Success")
+  end
+
 end
   
 
