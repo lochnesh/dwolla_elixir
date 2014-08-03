@@ -9,7 +9,7 @@ defmodule TransactionsIntegrationTest do
         pin: get_pin(),
         amount: ".01"], Dwolla.Client.new)
     
-    success = HashDict.fetch!(response, "Success")
+    success = Dict.fetch!(response, "Success")
 
     assert true == success
   end
@@ -25,9 +25,9 @@ defmodule TransactionsIntegrationTest do
   #    %{"types" => "money_received",
   #      "limit" => "1"})
     
-  #  response = HashDict.fetch!(listing, "Response")
+  #  response = Dict.fetch!(listing, "Response")
 
-  #  transaction_id = HashDict.fetch!(Enum.fetch!(response, 0), "Id")
+  #  transaction_id = Dict.fetch!(Enum.fetch!(response, 0), "Id")
 
   #  refund_response = Dwolla.Transactions.refund(
   #    [ pin: get_pin(),
@@ -35,27 +35,27 @@ defmodule TransactionsIntegrationTest do
   #      fundsSource: "Balance",
   #      amount: ".01"], Dwolla.Client.client(token: get_merchant_token()))
 
-  #  success = HashDict.fetch!(refund_response, "Success")
+  #  success = Dict.fetch!(refund_response, "Success")
 
   #  assert true == success
   #end
 
   test "should get by id" do
     client = Dwolla.Client.new
-    id = HashDict.fetch!(Dwolla.Transactions.send([
+    id = Dict.fetch!(Dwolla.Transactions.send([
       destinationId: "812-201-0130",
       pin: get_pin(),
       amount: ".01"], client), "Response") 
 
     response = Dwolla.Transactions.get_by_id(id, client)
 
-    success = HashDict.fetch!(response, "Success")
-    transaction = HashDict.fetch!(response, "Response")
+    success = Dict.fetch!(response, "Success")
+    transaction = Dict.fetch!(response, "Response")
 
     assert true == success
-    assert 0.01 == HashDict.fetch!(transaction, "Amount")
-    assert "812-201-0130" == HashDict.fetch!(transaction, "DestinationId")
-    assert "Dwolla" == HashDict.fetch!(transaction, "UserType")
+    assert 0.01 == Dict.fetch!(transaction, "Amount")
+    assert "812-201-0130" == Dict.fetch!(transaction, "DestinationId")
+    assert "Dwolla" == Dict.fetch!(transaction, "UserType")
   end
 
   test "should get stats" do
@@ -64,12 +64,12 @@ defmodule TransactionsIntegrationTest do
       Dwolla.Client.new,
       %{"startDate" => "2014-04-01"})
     
-    success = HashDict.fetch!(response, "Success")
-    details = HashDict.fetch!(response, "Response")
+    success = Dict.fetch!(response, "Success")
+    details = Dict.fetch!(response, "Response")
 
     assert true == success
-    assert 1 <= HashDict.fetch!(details, "TransactionsCount")
-    assert 1 <= HashDict.fetch!(details, "TransactionsTotal")
+    assert 1 <= Dict.fetch!(details, "TransactionsCount")
+    assert 1 <= Dict.fetch!(details, "TransactionsTotal")
   end
 
   test "should get transaction list" do
@@ -81,12 +81,12 @@ defmodule TransactionsIntegrationTest do
         "types" => "money_sent"  
       })
 
-    success = HashDict.fetch!(response, "Success")
-    details = HashDict.fetch!(response, "Response")
+    success = Dict.fetch!(response, "Success")
+    details = Dict.fetch!(response, "Response")
 
     assert true == success
     assert 33 == Enum.count details
-    assert true == Enum.all? details, fn(x) -> HashDict.fetch!(x, "Type") == "money_sent" end
+    assert true == Enum.all? details, fn(x) -> Dict.fetch!(x, "Type") == "money_sent" end
 
   end
 

@@ -6,15 +6,15 @@ defmodule RequestsIntegrationTest do
   test "should request money" do
     response = request()
     
-    success = HashDict.fetch!(response, "Success")
-    id = HashDict.fetch!(response, "Response")
+    success = Dict.fetch!(response, "Success")
+    id = Dict.fetch!(response, "Response")
 
     assert true == success
     assert 0 < id
   end
 
   test "should fulfill request" do
-    id = HashDict.fetch!(request(), "Response")
+    id = Dict.fetch!(request(), "Response")
 
     response = Dwolla.Requests.fulfill(
       id,
@@ -22,15 +22,15 @@ defmodule RequestsIntegrationTest do
        amount: ".01"],
       Dwolla.Client.client(token: get_merchant_token())) 
 
-    success = HashDict.fetch!(response, "Success")
-    details = HashDict.fetch!(response, "Response")
-    source = HashDict.fetch!(details, "Source")
-    dest = HashDict.fetch!(details, "Destination")
+    success = Dict.fetch!(response, "Success")
+    details = Dict.fetch!(response, "Response")
+    source = Dict.fetch!(details, "Source")
+    dest = Dict.fetch!(details, "Destination")
 
     assert true == success
-    assert 0.01 == HashDict.fetch!(details, "Amount")
-    assert "812-201-0130" == HashDict.fetch!(source,"Id")
-    assert "812-443-3023" == HashDict.fetch!(dest,"Id")
+    assert 0.01 == Dict.fetch!(details, "Amount")
+    assert "812-201-0130" == Dict.fetch!(source,"Id")
+    assert "812-443-3023" == Dict.fetch!(dest,"Id")
   end
 
   test "should list pending requests" do
@@ -43,33 +43,33 @@ defmodule RequestsIntegrationTest do
       %{"start_date" => "2014-04-01",
         "limit" => "3"})
 
-    success = HashDict.fetch!(response, "Success")
-    details = HashDict.fetch!(response, "Response")
+    success = Dict.fetch!(response, "Success")
+    details = Dict.fetch!(response, "Response")
 
     assert true == success
     assert 3 == Enum.count details
-    assert true = Enum.all? details, fn(x) -> HashDict.fetch!(x, "Status") == "Pending" end 
+    assert true = Enum.all? details, fn(x) -> Dict.fetch!(x, "Status") == "Pending" end 
 
   end
   
   test "should get requests by id" do 
-    id = HashDict.fetch!(request(), "Response")
+    id = Dict.fetch!(request(), "Response")
 
     response = Dwolla.Requests.get_by_id(id, Dwolla.Client.new)
 
-    success = HashDict.fetch!(response, "Success")
-    returned_id = HashDict.fetch!(HashDict.fetch!(response, "Response"), "Id")
+    success = Dict.fetch!(response, "Success")
+    returned_id = Dict.fetch!(Dict.fetch!(response, "Response"), "Id")
 
     assert true == success
     assert returned_id == id
   end
 
   test "should cancel request" do 
-    id = HashDict.fetch!(request(), "Response")
+    id = Dict.fetch!(request(), "Response")
 
     response = Dwolla.Requests.cancel(id, Dwolla.Client.new)
 
-    success = HashDict.fetch!(response, "Success")
+    success = Dict.fetch!(response, "Success")
 
     assert true == success
   end

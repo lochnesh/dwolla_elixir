@@ -4,25 +4,25 @@ defmodule UsersIntegrationTest do
   test "should get basic user info" do
     user_response = Dwolla.Users.get("skyler@dwolla.com", Dwolla.Client.new)
 
-    success = HashDict.fetch!(user_response, "Success")
-    user = HashDict.fetch!(user_response, "Response")
+    success = Dict.fetch!(user_response, "Success")
+    user = Dict.fetch!(user_response, "Response")
 
     assert true == success
-    assert "Skyler Nesheim" == HashDict.fetch!(user, "Name")
-    assert "812-443-3023" == HashDict.fetch!(user, "Id")
+    assert "Skyler Nesheim" == Dict.fetch!(user, "Name")
+    assert "812-443-3023" == Dict.fetch!(user, "Id")
   end
   
   test "should get account info with oauth token" do
     user_response = Dwolla.Users.account(Dwolla.Client.new)
     
-    success = HashDict.fetch!(user_response, "Success")
-    user = HashDict.fetch!(user_response, "Response")
+    success = Dict.fetch!(user_response, "Success")
+    user = Dict.fetch!(user_response, "Response")
 
     assert true == success
-    assert "Skyler Nesheim" == HashDict.fetch!(user, "Name")
-    assert "812-443-3023" == HashDict.fetch!(user, "Id")
-    assert "Des Moines" == HashDict.fetch!(user, "City")
-    assert "Personal" == HashDict.fetch!(user, "Type")
+    assert "Skyler Nesheim" == Dict.fetch!(user, "Name")
+    assert "812-443-3023" == Dict.fetch!(user, "Id")
+    assert "Des Moines" == Dict.fetch!(user, "City")
+    assert "Personal" == Dict.fetch!(user, "Type")
   end
 
   test "should get avatar given dwolla id" do
@@ -34,7 +34,7 @@ defmodule UsersIntegrationTest do
   test "should get nearby" do 
     response = Dwolla.Users.nearby(0,0,Dwolla.Client.new)
 
-    success = HashDict.fetch!(response, "Success")
+    success = Dict.fetch!(response, "Success")
 
     assert true == success
   end
