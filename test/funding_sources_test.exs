@@ -30,4 +30,15 @@ defmodule FundingSourcesTest do
     end
   end
 
+  test "should withdraw" do
+    with_mock HTTPoison, [post: fn(_url, _body, _headers) -> empty_response() end] do
+      body = [ pin: "3333",
+               amount: ".01"]
+      Dwolla.FundingSources.withdraw("12345", body, client(token: "token"))
+      assert called HTTPoison.post("https://uat.dwolla.com/oauth/rest/fundingsources/12345/withdraw?oauth_token=token",
+      JSON.encode!(body),
+      [{"Content-Type","application/json"}])
+    end
+  end
+
 end

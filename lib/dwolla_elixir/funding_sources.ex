@@ -13,5 +13,9 @@ defmodule Dwolla.FundingSources do
 
   @doc "https://developers.dwolla.com/dev/docs/funding/deposit"
   def deposit(id, body, client), do: post("fundingsources/#{id}/deposit", client(client, :token), body)
+  
+  @doc "https://developers.dwolla.com/dev/docs/funding/withdraw"
+  def withdraw(id, body, client), do: post("fundingsources/#{id}/withdraw", client(client, :token), body)
+
 end
  
