@@ -4,14 +4,11 @@ defmodule TransactionsIntegrationTest do
   import Dwolla.IntegrationTest
 
   test "should send money" do
-    response = Dwolla.Transactions.send(
+    assert true = Dwolla.Transactions.send(
       [ destinationId: "812-201-0130",
         pin: get_pin(),
         amount: ".01"], Dwolla.Client.new)
-    
-    success = Dict.fetch!(response, "Success")
-
-    assert true == success
+      |> Dict.fetch!("Success")
   end
 
   #test "should refund money" do
@@ -48,14 +45,12 @@ defmodule TransactionsIntegrationTest do
       amount: ".01"], client), "Response") 
 
     response = Dwolla.Transactions.get_by_id(id, client)
-
-    success = Dict.fetch!(response, "Success")
     transaction = Dict.fetch!(response, "Response")
 
-    assert true == success
-    assert 0.01 == Dict.fetch!(transaction, "Amount")
-    assert "812-201-0130" == Dict.fetch!(transaction, "DestinationId")
-    assert "Dwolla" == Dict.fetch!(transaction, "UserType")
+    assert true == response |> Dict.fetch!("Success")
+    assert 0.01 == transaction |> Dict.fetch!("Amount")
+    assert "812-201-0130" == transaction |> Dict.fetch!("DestinationId")
+    assert "Dwolla" == transaction |>Dict.fetch!("UserType")
   end
 
   test "should get stats" do
@@ -64,12 +59,11 @@ defmodule TransactionsIntegrationTest do
       Dwolla.Client.new,
       %{"startDate" => "2014-04-01"})
     
-    success = Dict.fetch!(response, "Success")
     details = Dict.fetch!(response, "Response")
 
-    assert true == success
-    assert 1 <= Dict.fetch!(details, "TransactionsCount")
-    assert 1 <= Dict.fetch!(details, "TransactionsTotal")
+    assert true == response |> Dict.fetch!("Success")
+    assert 1 <= details |> Dict.fetch!("TransactionsCount")
+    assert 1 <= details |> Dict.fetch!("TransactionsTotal")
   end
 
   test "should get transaction list" do
@@ -81,10 +75,9 @@ defmodule TransactionsIntegrationTest do
         "types" => "money_sent"  
       })
 
-    success = Dict.fetch!(response, "Success")
     details = Dict.fetch!(response, "Response")
 
-    assert true == success
+    assert true == response |> Dict.fetch!("Success")
     assert 33 == Enum.count details
     assert true == Enum.all? details, fn(x) -> Dict.fetch!(x, "Type") == "money_sent" end
 
