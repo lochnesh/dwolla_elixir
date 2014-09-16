@@ -3,8 +3,8 @@ defmodule DwollaElixir.Mixfile do
 
   def project do
     [ app: :dwolla_elixir,
-      version: "0.0.1",
-      elixir: "~> 0.15.0",
+      version: "0.1.0",
+      elixir: "~> 1.0.0",
       test_paths: test_paths(Mix.env),
       deps: deps
       ]
@@ -26,8 +26,8 @@ defmodule DwollaElixir.Mixfile do
   defp deps do
     [
       {:json, "~> 0.3.0"},
-      {:httpoison, "~> 0.3"},
-      {:hackney, github: "benoitc/hackney", tag: "0.13.0"},
+      {:httpoison, "~> 0.4.2"},
+      {:hackney, "~> 0.13.1"},
       {:mock, github: "lochnesh/mock"}
     ]
   end
