@@ -22,7 +22,7 @@ def application do
 end
 ````
 
-##Obtaining a client
+## Obtaining a client
 The Dwolla end points require the application key and secret or an oauth token. This API wrapper uses an Elixir record called Client which holds all three.  The wrapped end points require a Client record.  To obtain a client record, 
 
 ```` elixir
@@ -35,24 +35,24 @@ client = Dwolla.Client.new
 client = Dwolla.Client.client(key: "KEY", secret: "SECRET", token: "TOKEN")
 ````
 
-##Examples
+## Examples
 To start in interactive console
 ```` elixir
 iex -S mix
 ```` 
 
--Obtain a client record
+- Obtain a client record
 ```` elixir
 require Dwolla.Client
 client = Dwolla.Client.client(key: "KEY", secret: "SECRET", token: "TOKEN")
 ````
 
--Get user by Id
+- Get user by Id
 ```` elixir
 Dwolla.Users.get("reflector@dwolla.com",client)
 ````
 
-##Integration tests
+## Integration tests
 Integration tests are contained in integration_test folder. Integration tests execute against the [Dwolla UAT environment](https://uat.dwolla.com) To run, define the following environment variables (you will need to obtain an application key, secret, and an oauth_token.
 [Get oauth token](https://developers.dwolla.com/dev/token)
 
@@ -72,7 +72,7 @@ export PIN={TEST_USER_PIN}
 
 ## License
 
-Copyright © 2014 Dwolla
+Copyright Â© 2014 Dwolla
 
 Released under the MIT License:
 <http://www.opensource.org/licenses/mit-license.php>
